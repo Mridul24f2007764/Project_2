@@ -4,6 +4,7 @@ import os
 from typing import Optional
 from app.utils.openai_client import get_openai_response
 from app.utils.file_handler import save_upload_file_temporarily
+import gunicorn
 
 app = FastAPI(title="IITM Assignment API")
 
