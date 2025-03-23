@@ -4,9 +4,15 @@ import os
 from typing import Optional
 from app.utils.openai_client import get_openai_response
 from app.utils.file_handler import save_upload_file_temporarily
-import gunicorn
 
 app = FastAPI(title="IITM Assignment API")
+
+import sys
+import os
+
+# Ensure the root directory is in the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 
 # Add CORS middleware
 app.add_middleware(
@@ -35,6 +41,7 @@ async def process_question(
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# Run locally with Uvicorn
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
